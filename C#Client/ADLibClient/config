@@ -1,0 +1,3 @@
+[remote "Insane Geek"]
+	url = insanegeek.com/github
+	puttykeyfile = C:/Program Files (x86)/GitExtensions/PuTTY/privatekey.ppk
