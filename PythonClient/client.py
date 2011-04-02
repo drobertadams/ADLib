@@ -12,10 +12,6 @@ Known issues:
     * Sending anything via the serial port to the Arduino will reset
       it. For the Uno, you can connect a 100uF capacitor between GND and RST (short
       lead into GND) to disable auto-reset.
-
-Todo:
-    * Convert createMessage() into a standalone class. Encapsulate serial write
-      in that too.
 """
 
 import optparse
@@ -30,6 +26,11 @@ NUMERIC = 2
 NORMALIZED = 3
 
 class ADLib:
+    """ADLib Python Client Class.
+    Usage: 
+        adlib = ADLib("/dev/tty.usbmodem411", 9600)     # Init ADLib
+        adlib.sendNormalized(device=1, value=45)        # Send data
+    """
     
     def __init__(self, serial, baud):
         self.serialPort = serial
@@ -73,13 +74,9 @@ class ADLib:
         self._writeSerial(msg)
     
     def _writeSerial(self, message):
-        print message
-        return
         ser = serial.Serial(self.serialPort, self.baud, timeout=1)
         time.sleep(2)   # delay to allow the Arduino to reset, if necessary
         ser.write(message)        
-
-
 
 
 #=========================================================================
